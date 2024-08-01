@@ -1,0 +1,196 @@
+*{
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  /* border: 1px solid black; */
+}
+.h1{
+  position: absolute;
+  color: white;
+}
+
+img{
+  width: 100%;
+  height: 100%;
+  border-radius: 10px;
+}
+
+.borderly{
+  border: 1px solid blueviolet;
+}
+
+.HideorShow{
+  display: block;
+}
+.main-container{
+  position: relative;
+  overflow: auto;
+  height: 100vh;
+}
+
+ul{
+  margin: 0;
+  padding: 0;
+  color: white;
+}
+
+ul li a:hover{
+  cursor: pointer;
+}
+
+.items{
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  height: 100%;
+  overflow: scroll;
+  list-style-type: none;
+  /* text-align: center; */
+
+}
+/* App.css */
+
+/* Sidebar item hover effect */
+.sidebar .items li {
+  cursor: pointer;
+  padding: 10px;
+  transition: background-color 0.2s;
+  width: 100%;
+}
+
+.sidebar .items li:hover {
+  background-color: #5390eb;
+  transition: 0.4s ease-in;
+  border-radius: 10%;
+
+}
+
+/* Active state styling */
+.sidebar .items li.active {
+  background-color: #5390eb;
+  font-weight: bold;
+  border-radius: 10%;
+}
+
+.icon{
+  margin-right: 15%;
+  margin-top: 5%;
+}
+
+/* home page styles */
+.home-content{
+        padding-left: 5%;
+        padding-right: 5%;
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        grid-gap: 5%;
+        height: 70%;
+        border: 1px solid black;
+}
+
+@media (max-width: 767.98px) {
+  .sidebar {
+    width: 50%;
+  }
+
+  .home-content{
+    display: flex;
+    flex-direction: column;
+    height: fit-content;
+    justify-content: space-between;
+    /* align-items: flex-start; */
+    margin-top: 20%;
+    padding: 5% 5% ;
+  }
+ 
+  .home-content div{
+    margin-bottom: 5%;
+  }
+
+}
+/* *{
+  border: 2px solid greenyellow;
+} */
+
+/* Custom Scrollbar Styles */
+.sidebar {
+  background-color: #343a40; /* Sidebar background color */
+  color: white;
+}
+
+.sidebar::-webkit-scrollbar {
+  width: 12px; /* Width of the scrollbar */
+}
+
+.sidebar::-webkit-scrollbar-track {
+  background: #343a40; /* Background color of the scrollbar track */
+}
+
+.sidebar::-webkit-scrollbar-thumb {
+  background-color: #495057; /* Color of the scrollbar thumb */
+  border-radius: 10px; /* Roundness of the scrollbar thumb */
+  border: 3px solid #343a40; /* Padding around the scrollbar thumb */
+}
+
+/* Firefox scrollbar styling */
+.sidebar {
+  scrollbar-color: #495057 #343a40; /* thumb color, track color */
+  scrollbar-width: thin; /* width of the scrollbar */
+}
+/* for the side bar */
+/* 
+.d-flex {
+  display: flex;
+}
+
+.sidebar {
+  min-width: 250px;
+}
+
+.working-area {
+  flex-grow: 1;
+} *//* App.css or your main CSS file */
+
+/* .d-flex {
+  display: flex;
+}
+
+.sidebar {
+  min-width: 250px;
+  transition: width 0.3s;
+}
+
+.sidebar.d-none {
+  display: none;
+}
+
+.sidebar.d-block {
+  display: block;
+  top: 30%;
+  z-index: 1001;
+
+} */
+/* App.css or your main CSS file */
+/* .sidebar {
+  transition: width 0.3s ease;
+}
+
+.settings-submenu {
+  top: 0;
+  left: 100%;
+  white-space: nowrap;
+}
+
+.topbar {
+  position: relative;
+  z-index: 1000;
+}
+
+.toggle-button {
+  z-index: 1001;
+  position: fixed;
+  top: 10px;
+  left: 10px;
+} */
+
