@@ -1,7 +1,13 @@
-// firebase.js
 import { initializeApp } from "firebase/app";
-import { getAuth, GoogleAuthProvider, signInWithPopup, createUserWithEmailAndPassword, signOut, sendPasswordResetEmail } from "firebase/auth";
-import { getFirestore, collection, getDocs, doc, getDoc } from "firebase/firestore";
+import {
+  getAuth,
+  GoogleAuthProvider,
+  signInWithPopup,
+  createUserWithEmailAndPassword,
+  signOut,
+  sendPasswordResetEmail,
+} from "firebase/auth";
+import { getFirestore, setDoc, doc, getDoc } from "firebase/firestore";
 
 const firebaseConfig = {
   apiKey: "AIzaSyBCkEnyDjLUw4Ei2xlLL4LgUQPsJy8qQUs",
@@ -17,7 +23,7 @@ const auth = getAuth(app);
 const provider = new GoogleAuthProvider();
 const db = getFirestore(app);
 
-// Function to create user with email and password
+// Function to create a user with email and password
 const signUpWithEmailPassword = (email, password) => {
   return createUserWithEmailAndPassword(auth, email, password);
 };
@@ -32,20 +38,41 @@ const sendResetPasswordEmail = (email) => {
   return sendPasswordResetEmail(auth, email);
 };
 
-// Function to load lessons from Firestore
-const loadLessons = async () => {
-  const lessonsCol = collection(db, 'lessons');
-  const lessonsSnapshot = await getDocs(lessonsCol);
-  const lessonsList = lessonsSnapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
-  return lessonsList;
+// Function to update or create username for a given userId
+const updateUsername = async (userId, username) => {
+  try {
+    const userDocRef = doc(db, 'myUsers', userId); // Ensure collection name matches Firestore setup
+    await setDoc(userDocRef, { userID: userId, username: username }, { merge: true });
+    console.log('Username updated successfully.');
+  } catch (error) {
+    console.error('Error updating username: ', error);
+  }
 };
 
-// Function to load a single lesson from Firestore by ID
-const loadLessonById = async (id) => {
-  const lessonDoc = doc(db, 'lessons', id);
-  const lessonSnapshot = await getDoc(lessonDoc);
-  return lessonSnapshot.exists() ? lessonSnapshot.data() : null;
+// Retrieve the username for the current user
+const getUsername = async (userId) => {
+  try {
+    const userDoc = await getDoc(doc(db, 'myUsers', userId)); // Ensure collection name matches Firestore setup
+    if (userDoc.exists()) {
+      return userDoc.data().username;
+    } else {
+      console.log('No such document!');
+      return null;
+    }
+  } catch (error) {
+    console.error('Error fetching username: ', error);
+    return null;
+  }
 };
 
 // Export functions
-export { auth, provider, signUpWithEmailPassword, signInWithPopup, logOut, sendResetPasswordEmail, loadLessons, loadLessonById };
+export {
+  auth,
+  provider,
+  signUpWithEmailPassword,
+  signInWithPopup,
+  logOut,
+  sendResetPasswordEmail,
+  updateUsername,
+  getUsername,
+};

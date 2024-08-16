@@ -29,5 +29,3 @@ export const pylessons = {
   // Add more lessons as needed
  
 };
-const me = lesson3.content
-console.log(me)
