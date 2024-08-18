@@ -6,7 +6,7 @@ import { faBars, faTimes, faStar, faSliders, faHouseChimney, faBook } from '@for
 import "../App.css";
 import { pylessons } from '../pylessons';
 
-const SideBar = ({ setActiveLesson }) => {
+const SideBar = ({ActiveLesson }) => {
   const [showSidebar, setShowSidebar] = useState(false);
   const [activeItem, setActiveItem] = useState('home');
   const sidebarRef = useRef(null); // Reference to the sidebar element
@@ -52,7 +52,7 @@ const SideBar = ({ setActiveLesson }) => {
       icon: faBook,
       label: lesson.title,
       action: () => {
-        setActiveLesson(`lesson${index + 1}`, lesson.content);
+        ActiveLesson(`lesson${index + 1}`, lesson.content, lesson.title);
         console.log(`Lesson ID: lesson${index + 1}`);
         console.log(`Index: ${index}`);
       }

@@ -62,7 +62,7 @@ ul li a:hover{
 .sidebar .items li:hover {
   background-color: #5390eb;
   transition: 0.4s ease-in;
-  border-radius: 10%;
+  /* border-radius: 10%; */
 
 }
 
@@ -70,7 +70,7 @@ ul li a:hover{
 .sidebar .items li.active {
   background-color: #5390eb;
   font-weight: bold;
-  border-radius: 10%;
+  /* border-radius: 10%; */
 }
 
 .icon{

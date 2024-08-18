@@ -7,7 +7,7 @@ import SideBar from './SideBar';
 import { Dropdown, DropdownButton, Modal, Button, Spinner } from 'react-bootstrap';
 import { logOut, sendResetPasswordEmail, auth, updateUsername, getUsername } from '../firebase';
 
-const TopBar = ({ user, setActiveLesson, setContent }) => {
+const TopBar = ({ user, ActiveLesson}) => {
   const [isDarkMode, setIsDarkMode] = useState(false);
   const [showModal, setShowModal] = useState(false);
   const [showResetPasswordModal, setShowResetPasswordModal] = useState(false);
@@ -111,7 +111,7 @@ const TopBar = ({ user, setActiveLesson, setContent }) => {
   return (
     <div className="topbar d-flex justify-content-between align-items-center bg-secondary px-2 fixed-top" style={{ height: '55px' }}>
       <div>
-        <SideBar setActiveLesson={setActiveLesson} setContent={setContent} />
+        <SideBar ActiveLesson={ActiveLesson} />
       </div>
       <div className="icon-wrapper d-flex align-items-center">
         <span className="username mx-2" style={{ color: 'white' }}>{displayName}</span>
