@@ -1,17 +1,28 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { useNavigate } from 'react-router-dom';
-import 'bootstrap/dist/css/bootstrap.min.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faBars, faTimes, faStar, faSliders, faHouseChimney, faBook } from '@fortawesome/free-solid-svg-icons';
+import 'bootstrap/dist/css/bootstrap.min.css';
 import "../App.css";
 import { pylessons } from '../pylessons';
 
-const SideBar = ({ActiveLesson }) => {
+const SideBar = ({ ActiveLesson }) => {
   const [showSidebar, setShowSidebar] = useState(false);
   const [activeItem, setActiveItem] = useState('home');
-  const sidebarRef = useRef(null); // Reference to the sidebar element
+  const sidebarRef = useRef(null);
 
-  const navigate = useNavigate();
+  const cardStyle = {
+    height: '70%',
+    textAlign: 'center',
+    display: 'flex',
+    flexDirection: 'column',
+    justifyContent: 'space-around',
+    padding: '5%',
+    backgroundColor: '#5390eb',
+    color: 'white',
+    boxShadow: '5px 8px 17px black',
+    borderRadius: '8px'
+  };
+  
 
   const toggleSidebar = () => {
     setShowSidebar(!showSidebar);
@@ -25,12 +36,38 @@ const SideBar = ({ActiveLesson }) => {
   };
 
   const handleHomeClick = () => {
-    navigate('/home');
-  };
+  const homeContent = (
+    <>
+    <div className="home-outer-div d-flex align-items-center justify-content-center mx-auto" style={{ height: "100vh", textAlign: "center" }}>
+      <div className="home-content pt-4" style={{ maxWidth: "600px", width: "100%" }}>
+        <div className="w-100 border border-4 border-primary" style={cardStyle}>
+          <h3>Course Progress(%)</h3>
+          <div className="progress" role="progressbar" aria-label="Info example" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100">
+            <div className="progress-bar bg-info" style={{ width: "20%", color: 'white', fontSize: '1.2rem', height: '100%', padding: '3.5%' }}>20%</div>
+          </div>
+        </div>
+        <div className="w-100 border border-4 border-primary mt-3" style={cardStyle}>
+          <h3>LESSONS COMPLETED</h3>
+          <div><h3>5</h3></div>
+        </div>
+        <div className="w-100 border border-4 border-primary mt-3" style={cardStyle}>
+          <h3>QUIZZES COMPLETED</h3>
+          <div><h3>5</h3></div>
+        </div>
+        <div className="w-100 border border-4 border-primary mt-3" style={cardStyle}>
+          <h3>PROJECTS COMPLETED</h3>
+          <div><h3>5</h3></div>
+        </div>
+      </div>
+    </div>
+    </>
+  );
+
+  ActiveLesson('home', homeContent, 'Home');
+};
 
   useEffect(() => {
     const handleClickOutside = (event) => {
-      // Check if the click was outside the sidebar
       if (sidebarRef.current && !sidebarRef.current.contains(event.target)) {
         setShowSidebar(false);
       }
@@ -41,7 +78,7 @@ const SideBar = ({ActiveLesson }) => {
     return () => {
       document.removeEventListener('mousedown', handleClickOutside);
     };
-  }, []); // Empty dependency array means the effect runs only once
+  }, []);
 
   const items = [
     { id: 'home', icon: faHouseChimney, label: 'Home', action: handleHomeClick },
@@ -53,8 +90,6 @@ const SideBar = ({ActiveLesson }) => {
       label: lesson.title,
       action: () => {
         ActiveLesson(`lesson${index + 1}`, lesson.content, lesson.title);
-        console.log(`Lesson ID: lesson${index + 1}`);
-        console.log(`Index: ${index}`);
       }
     })),
   ];
@@ -87,6 +122,7 @@ const SideBar = ({ActiveLesson }) => {
       </div>
     </>
   );
-}
+};
+
 
 export default SideBar;

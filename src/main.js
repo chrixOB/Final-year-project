@@ -3,7 +3,7 @@ import { useLocation } from 'react-router-dom';
 import TopBar from './components/TopBar';
 import WorkingArea from './components/WorkingArea';
 // import SideBar from './components/SideBar';
-import { auth } from './firebase'; // Adjusted import path
+import { auth } from './firebase'; 
 
 function Main() {
   // eslint-disable-next-line
