@@ -49,6 +49,12 @@ ul li a:hover{
   /* text-align: center; */
 
 }
+.content-area {
+  background-color: #e0f7fa; /* Soft blue color */
+  border-radius: 8px;
+  padding: 16px; /* Adjust padding as needed */
+}
+
 /* App.css */
 
 /* Sidebar item hover effect */
@@ -78,6 +84,41 @@ ul li a:hover{
   margin-top: 5%;
 }
 
+.editor-container {
+  height: 300px;
+  border: 1px solid #ddd;
+  margin-top: 20px;
+}
+
+.toggle-button {
+  margin-bottom: 10px;
+  padding: 5px 10px;
+  cursor: pointer;
+}
+
+.lesson-paragraph {
+  margin-bottom: 15px;
+}
+
+.paragraph-1 {
+  background-color: #f0f8ff;
+}
+
+.paragraph-2 {
+  background-color: #e6e6fa;
+}
+
+.paragraph-3 {
+  background-color: #f5f5dc;
+}
+
+.paragraph-4 {
+  background-color: #ffe4e1;
+}
+
+.course-progress{
+  margin-top: 7%;
+}
 /* home page styles */
 .home-content{
         padding-left: 5%;
@@ -88,6 +129,7 @@ ul li a:hover{
         height: 70%;
         border: 1px solid black;
 }
+
 
 @media (max-width: 767.98px) {
   .sidebar {
@@ -107,6 +149,10 @@ ul li a:hover{
   .home-content div{
     margin-bottom: 5%;
   }
+  .working-area,.no-selected-lesson, .active-display{
+    transform: translateY(80px);
+    height: fit-content;
+  }
 
 }
 /* *{
@@ -117,6 +163,7 @@ ul li a:hover{
 .sidebar {
   background-color: #343a40; /* Sidebar background color */
   color: white;
+  border-radius: 5%;
 }
 
 .sidebar::-webkit-scrollbar {
@@ -138,59 +185,25 @@ ul li a:hover{
   scrollbar-color: #495057 #343a40; /* thumb color, track color */
   scrollbar-width: thin; /* width of the scrollbar */
 }
-/* for the side bar */
-/* 
-.d-flex {
-  display: flex;
-}
 
-.sidebar {
-  min-width: 250px;
-}
 
-.working-area {
-  flex-grow: 1;
-} *//* App.css or your main CSS file */
-
-/* .d-flex {
-  display: flex;
-}
-
-.sidebar {
-  min-width: 250px;
-  transition: width 0.3s;
-}
-
-.sidebar.d-none {
-  display: none;
-}
-
-.sidebar.d-block {
-  display: block;
-  top: 30%;
-  z-index: 1001;
-
-} */
-/* App.css or your main CSS file */
-/* .sidebar {
-  transition: width 0.3s ease;
-}
-
-.settings-submenu {
-  top: 0;
-  left: 100%;
-  white-space: nowrap;
-}
-
-.topbar {
+.editor-container {
   position: relative;
-  z-index: 1000;
 }
 
-.toggle-button {
-  z-index: 1001;
-  position: fixed;
-  top: 10px;
-  left: 10px;
-} */
+.editor {
+  height: 300px; /* Adjust as needed */
+  border: 1px solid #ccc;
+}
 
+.output-area {
+  margin-top: 10px;
+}
+
+.output-message {
+  color: green;
+}
+
+.error-message {
+  color: red;
+}

@@ -2,13 +2,13 @@ import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faSun, faMoon, faUser, faCaretDown, faSignOutAlt, faCheckCircle } from '@fortawesome/free-solid-svg-icons';
+import { faUser, faCaretDown, faSignOutAlt, faCheckCircle } from '@fortawesome/free-solid-svg-icons';
 import SideBar from './SideBar';
 import { Dropdown, DropdownButton, Modal, Button, Spinner } from 'react-bootstrap';
 import { logOut, sendResetPasswordEmail, auth, updateUsername, getUsername } from '../firebase';
 
 const TopBar = ({ user, ActiveLesson}) => {
-  const [isDarkMode, setIsDarkMode] = useState(false);
+  // const [isDarkMode, setIsDarkMode] = useState(false);
   const [showModal, setShowModal] = useState(false);
   const [showResetPasswordModal, setShowResetPasswordModal] = useState(false);
   const [resetPasswordError, setResetPasswordError] = useState('');
@@ -29,15 +29,16 @@ const TopBar = ({ user, ActiveLesson}) => {
         const fetchedUsername = await getUsername(userEmail);
         const initialDisplayName = fetchedUsername || user.substring(0, user.indexOf('@'));
         setDisplayName(initialDisplayName);
+        
       }
     };
 
     fetchUsername();
   }, [user]);
 
-  const toggleDarkMode = () => {
-    setIsDarkMode(!isDarkMode);
-  };
+  // const toggleDarkMode = () => {
+  //   setIsDarkMode(!isDarkMode);
+  // };
 
   const handleLogout = async () => {
     try {
@@ -116,10 +117,10 @@ const TopBar = ({ user, ActiveLesson}) => {
       <div className="icon-wrapper d-flex align-items-center">
         <span className="username mx-2" style={{ color: 'white' }}>{displayName}</span>
         <FontAwesomeIcon className="mx-2" icon={faUser} />
-        <button className={`toggle-theme btn btn-outline-light mx-2 ${isDarkMode ? 'dark' : ''}`} onClick={toggleDarkMode}>
-          <FontAwesomeIcon className="mx-1" icon={faSun} />
-          <FontAwesomeIcon className="mx-1" icon={faMoon} />
-        </button>
+        {/* <button className={`toggle-theme btn btn-outline-light mx-2 ${isDarkMode ? 'dark' : ''}`} onClick={toggleDarkMode}> */}
+          {/* <FontAwesomeIcon className="mx-1" icon={faSun} /> */}
+          {/* <FontAwesomeIcon className="mx-1" icon={faMoon} /> */}
+        {/* </button> */}
         <DropdownButton id="dropdown-basic-button" title={<FontAwesomeIcon icon={faCaretDown} />} className="mx-2" align="end">
           <Dropdown.Item onClick={handleShowResetPasswordModal}>Change Password</Dropdown.Item>
           <Dropdown.Item onClick={handleShowUsernameModal}>Change Username</Dropdown.Item>

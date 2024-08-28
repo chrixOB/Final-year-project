@@ -1,26 +1,32 @@
-import React, { useEffect } from 'react';
+import React from 'react';
+import CodeEditor from './CodeEditor'; // Ensure the path is correct
+import 'bootstrap/dist/css/bootstrap.min.css';
+import "../App.css";
+import QuizHolder from './QuizHolder';
 
-const WorkingArea = ({ activeLesson, content, title }) => {
-  useEffect(() => {
-    // Log the activeLesson and content to verify they are being received correctly
-    console.log('Active Lesson:', activeLesson);
-    console.log('title:', title)
-    console.log('Content:', content);
-  }, [activeLesson, title, content]);
+const WorkingArea = ({ selectedLesson, content, title }) => {
+  // Ensure content is defined and is a string
+  const isStringContent = typeof content === 'string';
 
   return (
-    <div className="working-area" style={{border:'2px solid black', marginTop:'5rem', marginLeft:'7rem'
-    }}>
-      {activeLesson ? (
-        <div style={{minWidth:'600px', minHeight:'600px', marginLeft:''}}>
-          <h2 style={{fontSize:'2.5rem',
-          textAlign:'center'
-          }}>{title}</h2>
-          <p>{content}</p>
-          {/* Add other content fields as needed */}
+    <div className="container d-flex flex-column align-items-center justify-content-center text-center" style={{ marginTop: '13%' }}>
+      {title && <h2 className="mb-4">{title}</h2>}
+      {isStringContent ? (
+        <div className="content-area p-4" style={{ backgroundColor: '#e0f7fa', borderRadius: '8px' }}>
+          {content && content.split('. ').map((para, index) => (
+            <p key={index} className={`lesson-paragraph paragraph-${index + 1} mb-4`}>
+              {para}.
+            </p>
+          ))}
+          {/* Render PythonEditor unconditionally */}
+          <CodeEditor />
+          <div style={{minHeight:'20px', border:"2px solid green"}}><QuizHolder/></div>
         </div>
       ) : (
-        <div>Please select a lesson from the sidebar.</div>
+        <>
+        <div>{content}</div>
+        <div>hellllooooooo</div>
+        </>
       )}
     </div>
   );

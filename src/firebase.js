@@ -1,3 +1,4 @@
+import { useEffect, useState } from "react";
 import { initializeApp } from "firebase/app";
 import {
   getAuth,
@@ -7,7 +8,7 @@ import {
   signOut,
   sendPasswordResetEmail,
 } from "firebase/auth";
-import { getFirestore, setDoc, doc, getDoc } from "firebase/firestore";
+import { getFirestore, setDoc, doc, getDoc, collection } from "firebase/firestore";
 
 const firebaseConfig = {
   apiKey: "AIzaSyBCkEnyDjLUw4Ei2xlLL4LgUQPsJy8qQUs",
@@ -65,6 +66,34 @@ const getUsername = async (userId) => {
   }
 };
 
+function useQuizData(quizId) {
+  const [quiz, setQuiz] = useState(null);
+
+  useEffect(() => {
+    const fetchQuizData = async () => {
+      if (!quizId) {
+        console.error('Quiz ID is undefined or null');
+        return;
+      }
+
+      try {
+        const quizDoc = await getDoc(doc(collection(db, "Quizzes"), quizId));
+        if (quizDoc.exists()) {
+          setQuiz(quizDoc.data());
+        } else {
+          console.log('No such quiz!');
+        }
+      } catch (error) {
+        console.error('Error fetching quiz data:', error);
+      }
+    };
+
+    fetchQuizData();
+  }, [quizId]);
+
+  return quiz;
+}
+
 // Export functions
 export {
   auth,
@@ -75,4 +104,5 @@ export {
   sendResetPasswordEmail,
   updateUsername,
   getUsername,
+  useQuizData
 };
