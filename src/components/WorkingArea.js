@@ -1,8 +1,9 @@
 import React from 'react';
-import CodeEditor from './CodeEditor'; // Ensure the path is correct
+// import CodeEditor from './CodeEditor'; // Ensure the path is correct
 import 'bootstrap/dist/css/bootstrap.min.css';
 import "../App.css";
 import QuizHolder from './QuizHolder';
+import IframeEditor from './IframeEditor';
 
 const WorkingArea = ({ selectedLesson, content, title }) => {
   // Ensure content is defined and is a string
@@ -18,14 +19,14 @@ const WorkingArea = ({ selectedLesson, content, title }) => {
               {para}.
             </p>
           ))}
-          {/* Render PythonEditor unconditionally */}
-          <CodeEditor />
-          <div style={{minHeight:'20px', border:"2px solid green"}}><QuizHolder/></div>
+          {/* Render IframeEditor unconditionally */}
+          <IframeEditor />
+          {/* <div style={{minHeight:'20px', border:"2px solid green"}}><QuizHolder/></div> */}
         </div>
       ) : (
         <>
         <div>{content}</div>
-        <div>hellllooooooo</div>
+        {/* <div>hellllooooooo</div> */}
         </>
       )}
     </div>

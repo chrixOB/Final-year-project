@@ -4,6 +4,7 @@ import { faBars, faTimes, faSliders, faHouseChimney, faBook, faQuestionCircle } 
 import 'bootstrap/dist/css/bootstrap.min.css';
 import "../App.css";
 import { pylessons } from '../pylessons';
+import QuizHolder from './QuizHolder';
 
 const SideBar = ({ ActiveLesson }) => {
   const [showSidebar, setShowSidebar] = useState(false);
@@ -86,8 +87,7 @@ const SideBar = ({ ActiveLesson }) => {
           ActiveLesson(`lesson${index + 1}`, lesson.content, lesson.title);
         }
       };
-
-      // Determine if a quiz should follow this lesson
+  
       const quizIndex = Math.floor(index / 5) + 1;
       const isQuizPosition = (index + 1) % 5 === 0;
       const quizItem = {
@@ -95,13 +95,14 @@ const SideBar = ({ ActiveLesson }) => {
         icon: faQuestionCircle,
         label: `Quiz ${quizIndex}`,
         action: () => {
-          ActiveLesson(`quiz${quizIndex}`, `Quiz ${quizIndex} content goes here.`, `Quiz ${quizIndex}`);
+          ActiveLesson(`quiz${quizIndex}`, <QuizHolder quizId={`quiz${quizIndex}`} />, `Quiz ${quizIndex}`);
         }
       };
-
+  
       return isQuizPosition ? [lessonItem, quizItem] : [lessonItem];
     }),
   ];
+  
 
   return (
     <>
