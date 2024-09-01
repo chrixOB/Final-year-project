@@ -5,7 +5,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faUser, faCaretDown, faSignOutAlt, faCheckCircle } from '@fortawesome/free-solid-svg-icons';
 import SideBar from './SideBar';
 import { Dropdown, DropdownButton, Modal, Button, Spinner } from 'react-bootstrap';
-import { logOut, sendResetPasswordEmail, auth, updateUsername, getUsername } from '../firebase';
+import { logOut, sendResetPasswordEmail, auth, updateUsername, getUsername } from '../firebase'; // inbuilt functions from firebase 
 
 const TopBar = ({ user, ActiveLesson}) => {
   // const [isDarkMode, setIsDarkMode] = useState(false);

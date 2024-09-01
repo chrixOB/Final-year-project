@@ -1,34 +1,17 @@
 import React from 'react';
-// import CodeEditor from './CodeEditor'; // Ensure the path is correct
-import 'bootstrap/dist/css/bootstrap.min.css';
-import "../App.css";
-import QuizHolder from './QuizHolder';
 import IframeEditor from './IframeEditor';
 
 const WorkingArea = ({ selectedLesson, content, title }) => {
-  // Ensure content is defined and is a string
-  const isStringContent = typeof content === 'string';
+  // Safeguard to ensure selectedLesson is defined
+  const isLesson = selectedLesson?.startsWith("lesson");
 
   return (
-    <div className="container d-flex flex-column align-items-center justify-content-center text-center" style={{ marginTop: '13%' }}>
+    <div className="container d-flex flex-column align-items-center justify-content-center align-text-left" style={{ marginTop: '13%' }}>
       {title && <h2 className="mb-4">{title}</h2>}
-      {isStringContent ? (
-        <div className="content-area p-4" style={{ backgroundColor: '#e0f7fa', borderRadius: '8px' }}>
-          {content && content.split('. ').map((para, index) => (
-            <p key={index} className={`lesson-paragraph paragraph-${index + 1} mb-4`}>
-              {para}.
-            </p>
-          ))}
-          {/* Render IframeEditor unconditionally */}
-          <IframeEditor />
-          {/* <div style={{minHeight:'20px', border:"2px solid green"}}><QuizHolder/></div> */}
-        </div>
-      ) : (
-        <>
-        <div>{content}</div>
-        {/* <div>hellllooooooo</div> */}
-        </>
-      )}
+      <div className="content-area p-4" style={{ backgroundColor: '#e0f7fa', borderRadius: '8px' }}>
+        {content}
+        {isLesson && <IframeEditor />}
+      </div>
     </div>
   );
 };

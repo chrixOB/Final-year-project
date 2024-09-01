@@ -1,4 +1,4 @@
-const quizzes = {
+export const quizzes = {
     quiz1: {
       title: "Quiz 1",
       questions: [
@@ -70,4 +70,4 @@ const quizzes = {
       ]
     }
   };
-export {quizzes}  
+// export {quizzes}  

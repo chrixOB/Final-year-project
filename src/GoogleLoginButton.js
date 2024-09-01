@@ -11,7 +11,7 @@ const GoogleLoginButton = () => {
     try {
       const result = await signInWithPopup(auth, provider);
       console.log('Login Success:', result);
-      localStorage.setItem('token', result.user.accessToken);
+      // localStorage.setItem('token', result.user.accessToken);
       navigate('/main');
     } catch (error) {
       console.log('Login Failed:', error);

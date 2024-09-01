@@ -3,14 +3,15 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faBars, faTimes, faSliders, faHouseChimney, faBook, faQuestionCircle } from '@fortawesome/free-solid-svg-icons';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import "../App.css";
-import { pylessons } from '../pylessons';
-import QuizHolder from './QuizHolder';
+import { pylessons } from '../pylessons'; // import lessons content from pylessons object.
+import QuizHolder from './QuizHolder'; // import the quiz holder component
 
 const SideBar = ({ ActiveLesson }) => {
   const [showSidebar, setShowSidebar] = useState(false);
   const [activeItem, setActiveItem] = useState('home');
   const sidebarRef = useRef(null);
 
+  // styling for custom card created(which displays on homePage)
   const cardStyle = {
     height: '70%',
     textAlign: 'center',
@@ -35,6 +36,9 @@ const SideBar = ({ ActiveLesson }) => {
     }
   };
 
+  let lessonsCompleted = 0;
+  let quizzesCompleted = 0;
+
   const handleHomeClick = () => {
     const homeContent = (
       <div className="home-outer-div d-flex align-items-center justify-content-center" style={{ border: '2px solid black', paddingTop: '0' }}>
@@ -46,10 +50,10 @@ const SideBar = ({ ActiveLesson }) => {
             </div>
           </div>
           <div className="w-100 border border-4 border-primary mt-3" style={cardStyle}>
-            <h3>LESSONS COMPLETED (10)</h3>
+            <h3>LESSONS COMPLETED ({lessonsCompleted})</h3>
           </div>
           <div className="w-100 border border-4 border-primary mt-3" style={cardStyle}>
-            <h3>QUIZZES COMPLETED (7)</h3>
+            <h3>QUIZZES COMPLETED ({quizzesCompleted})</h3>
           </div>
           <div className="w-100 border border-4 border-primary mt-3" style={cardStyle}>
             <h3>PROJECTS COMPLETED (5)</h3>
@@ -102,7 +106,6 @@ const SideBar = ({ ActiveLesson }) => {
       return isQuizPosition ? [lessonItem, quizItem] : [lessonItem];
     }),
   ];
-  
 
   return (
     <>

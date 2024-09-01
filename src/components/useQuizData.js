@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { quizzes } from './quizzes'; // Import the quizzes object
+import { quizzes } from "../quizzes"; // Import the quizzes object
 
 function useQuizData(quizId) {
   const [quiz, setQuiz] = useState(null);
@@ -16,4 +16,4 @@ function useQuizData(quizId) {
   return quiz;
 }
 
-export { useQuizData };
+export default useQuizData;
