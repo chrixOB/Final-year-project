@@ -25,7 +25,7 @@ const TopBar = ({ user, ActiveLesson}) => {
   useEffect(() => {
     const fetchUsername = async () => {
       if (user) {
-        const userEmail = auth.currentUser.email; // Get the current user's email
+        const userEmail = auth.currentUser?.email; // Get the current user's email
         const fetchedUsername = await getUsername(userEmail);
         const initialDisplayName = fetchedUsername || user.substring(0, user.indexOf('@'));
         setDisplayName(initialDisplayName);

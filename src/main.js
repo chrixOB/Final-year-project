@@ -42,7 +42,7 @@ function Main() {
           <TopBar user={user} ActiveLesson={handleLessonSelect}/>
           <div className="d-flex">
             {/* <SideBar setActiveLesson={handleLessonSelect} /> */}
-            <WorkingArea activeLesson={activeLesson} content={content} title={title}/>
+            <WorkingArea activeLesson={activeLesson} content={content} title={title} />
           </div>
         </>
       ) : (

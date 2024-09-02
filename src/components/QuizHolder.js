@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import useQuizData from './useQuizData';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
@@ -6,8 +6,29 @@ function QuizHolder({ quizId, goToNextLesson }) {
   const quiz = useQuizData(quizId);
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
   const [selectedAnswer, setSelectedAnswer] = useState(null);
+  const [userAnswers, setUserAnswers] = useState({});
   const [score, setScore] = useState(0);
   const [perfectScore, setPerfectScore] = useState(false);
+  const [quizFinished, setQuizFinished] = useState(false);
+
+  // Reset the state when the quizId changes
+  useEffect(() => {
+    setCurrentQuestionIndex(0);
+    setSelectedAnswer(null);
+    setUserAnswers({});
+    setScore(0);
+    setPerfectScore(false);
+    setQuizFinished(false);
+  }, [quizId]);
+
+  useEffect(() => {
+    // When currentQuestionIndex changes, update selectedAnswer to the saved answer
+    if (userAnswers[currentQuestionIndex] !== undefined) {
+      setSelectedAnswer(userAnswers[currentQuestionIndex]);
+    } else {
+      setSelectedAnswer(null);
+    }
+  }, [currentQuestionIndex]);
 
   if (!quiz) return <div>Loading...</div>;
 
@@ -16,14 +37,22 @@ function QuizHolder({ quizId, goToNextLesson }) {
   };
 
   const handleNextQuestion = () => {
-    const currentQuestion = quiz.questions[currentQuestionIndex];
-    if (selectedAnswer === currentQuestion.correctAnswer) {
-      setScore((prevScore) => prevScore + 1);
+    if (selectedAnswer) {
+      // Save the selected answer for the current question
+      setUserAnswers((prevAnswers) => ({
+        ...prevAnswers,
+        [currentQuestionIndex]: selectedAnswer,
+      }));
+
+      const currentQuestion = quiz.questions[currentQuestionIndex];
+      if (selectedAnswer === currentQuestion.correctAnswer) {
+        setScore((prevScore) => prevScore + 1);
+      }
     }
 
     if (currentQuestionIndex + 1 === quiz.questions.length) {
       // Check if the user got a perfect score
-      if (score + 1 === quiz.questions.length) {
+      if (score + (selectedAnswer === quiz.questions[currentQuestionIndex].correctAnswer ? 1 : 0) === quiz.questions.length) {
         setPerfectScore(true);
       }
     }
@@ -32,9 +61,31 @@ function QuizHolder({ quizId, goToNextLesson }) {
     setCurrentQuestionIndex((prev) => prev + 1);
   };
 
+  const handlePreviousQuestion = () => {
+    if (selectedAnswer) {
+      // Save the selected answer for the current question
+      setUserAnswers((prevAnswers) => ({
+        ...prevAnswers,
+        [currentQuestionIndex]: selectedAnswer,
+      }));
+    }
+
+    setSelectedAnswer(userAnswers[currentQuestionIndex] || null);
+    setCurrentQuestionIndex((prev) => prev - 1);
+  };
+
+  const handleFinishQuiz = () => {
+    setQuizFinished(true);
+  };
+
+  const handleGoToNextLesson = () => {
+    setQuizFinished(false);
+    goToNextLesson();
+  };
+
   const currentQuestion = quiz.questions[currentQuestionIndex];
 
-  if (!currentQuestion) {
+  if (quizFinished) {
     return (
       <div style={{ textAlign: 'center', marginTop: '20px' }}>
         {perfectScore && (
@@ -44,11 +95,26 @@ function QuizHolder({ quizId, goToNextLesson }) {
         )}
         <div style={{ fontSize: '1.5rem' }}>End of quiz. You scored: {score}/{quiz.questions.length}</div>
         <button
-          onClick={goToNextLesson}
+          onClick={handleGoToNextLesson}
           className='btn btn-primary mt-3'
           style={{ cursor: 'pointer' }}
         >
-          To Next Lesson
+          Go to Next Lesson
+        </button>
+      </div>
+    );
+  }
+
+  if (!currentQuestion) {
+    return (
+      <div style={{ textAlign: 'center', marginTop: '20px' }}>
+        <div style={{ fontSize: '1.5rem' }}>End of quiz. You scored: {score}/{quiz.questions.length}</div>
+        <button
+          onClick={handleGoToNextLesson}
+          className='btn btn-primary mt-3'
+          style={{ cursor: 'pointer' }}
+        >
+          Go to Next Lesson
         </button>
       </div>
     );
@@ -86,13 +152,31 @@ function QuizHolder({ quizId, goToNextLesson }) {
       </ul>
       <div className='d-flex justify-content-center mt-3'>
         <button
-          onClick={handleNextQuestion}
-          disabled={!selectedAnswer}
-          className='btn btn-primary'
-          style={{ cursor: 'pointer' }}
+          onClick={handlePreviousQuestion}
+          disabled={currentQuestionIndex === 0}
+          className='btn btn-secondary'
+          style={{ cursor: 'pointer', marginRight: '10px' }}
         >
-          Next question
+          Previous Question
         </button>
+        {currentQuestionIndex + 1 === quiz.questions.length ? (
+          <button
+            onClick={handleFinishQuiz}
+            className='btn btn-success'
+            style={{ cursor: 'pointer', marginRight: '10px' }}
+          >
+            Finish Quiz
+          </button>
+        ) : (
+          <button
+            onClick={handleNextQuestion}
+            disabled={!selectedAnswer}
+            className='btn btn-primary'
+            style={{ cursor: 'pointer', marginRight: '10px' }}
+          >
+            Next Question
+          </button>
+        )}
       </div>
     </div>
   );

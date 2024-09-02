@@ -1,9 +1,12 @@
 import React from 'react';
 import IframeEditor from './IframeEditor';
+import 'bootstrap/dist/css/bootstrap.min.css';
 
-const WorkingArea = ({ selectedLesson, content, title }) => {
+
+const WorkingArea = ({ activeLesson, content, title }) => {
   // Safeguard to ensure selectedLesson is defined
-  const isLesson = selectedLesson?.startsWith("lesson");
+  const isLesson = activeLesson?.startsWith("lesson");
+  console.log("Selected lesson: " + activeLesson)
 
   return (
     <div className="container d-flex flex-column align-items-center justify-content-center align-text-left" style={{ marginTop: '13%' }}>

@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faBars, faTimes, faSliders, faHouseChimney, faBook, faQuestionCircle } from '@fortawesome/free-solid-svg-icons';
+import { faBars, faTimes, faHouseChimney, faBook, faQuestionCircle } from '@fortawesome/free-solid-svg-icons';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import "../App.css";
 import { pylessons } from '../pylessons'; // import lessons content from pylessons object.
@@ -8,7 +8,7 @@ import QuizHolder from './QuizHolder'; // import the quiz holder component
 
 const SideBar = ({ ActiveLesson }) => {
   const [showSidebar, setShowSidebar] = useState(false);
-  const [activeItem, setActiveItem] = useState('home');
+  const [activeItem, setActiveItem] = useState('');
   const sidebarRef = useRef(null);
 
   // styling for custom card created(which displays on homePage)
@@ -39,6 +39,7 @@ const SideBar = ({ ActiveLesson }) => {
   let lessonsCompleted = 0;
   let quizzesCompleted = 0;
 
+  // hompage displays these four items
   const handleHomeClick = () => {
     const homeContent = (
       <div className="home-outer-div d-flex align-items-center justify-content-center" style={{ border: '2px solid black', paddingTop: '0' }}>
@@ -79,9 +80,10 @@ const SideBar = ({ ActiveLesson }) => {
     };
   }, []);
 
+  //Array of all items on the sidebar
   const items = [
     { id: 'home', icon: faHouseChimney, label: 'Home', action: handleHomeClick },
-    { id: 'sliders', icon: faSliders, label: 'Options' },
+    { id: '', icon: '', label: '' },
     ...Object.values(pylessons).flatMap((lesson, index) => {
       const lessonItem = {
         id: `lesson${index + 1}`,
@@ -92,6 +94,7 @@ const SideBar = ({ ActiveLesson }) => {
         }
       };
   
+      // Fix a quiz after every five lessons
       const quizIndex = Math.floor(index / 5) + 1;
       const isQuizPosition = (index + 1) % 5 === 0;
       const quizItem = {
