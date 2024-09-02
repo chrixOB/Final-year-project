@@ -3,7 +3,7 @@ import IframeEditor from './IframeEditor';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 
-const WorkingArea = ({ activeLesson, content, title }) => {
+const WorkingArea = ({ activeLesson, content, title, goToNextLesson}) => {
   // Safeguard to ensure selectedLesson is defined
   const isLesson = activeLesson?.startsWith("lesson");
   console.log("Selected lesson: " + activeLesson)

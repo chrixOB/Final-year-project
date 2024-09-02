@@ -2,6 +2,7 @@ export const pylessons = {
   lesson1: {
     title: 'Introduction to Python',
     content: (
+      <>
       <div>
         <p>What is Python?</p>
         <p>
@@ -23,7 +24,41 @@ export const pylessons = {
           <li>Python can be used to handle big data and perform complex mathematics.</li>
           <li>Python can be used for rapid prototyping or production-ready software development.</li>
         </ul>
+        <br/>
+    Why Python?
+    <br/>
+    <li>Python works on different platforms (Windows, Mac, Linux, Raspberry Pi, etc).</li>
+    <li>Python has a simple syntax similar to the English language.</li>
+    <li>Python has syntax that allows developers to write programs with fewer lines than some other programming languages.</li>
+    <li>Python runs on an interpreter system, meaning that code can be executed as soon as it is written. This means that prototyping can be very quick.</li>
+    <li>Python can be treated in a procedural way, an object-oriented way or a functional way.</li>
+
+    <br/>
+    <br/>
+Good to know
+<br/>
+<br/>
+
+    The most recent major version of Python is Python 3, which we shall be using in this tutorial. However, Python 2, although not being updated with anything other than security updates, is still quite popular.
+    In this tutorial Python will be written in a text editor. It is possible to write Python in an Integrated Development Environment, such as Thonny, Pycharm, Netbeans or Eclipse which are particularly useful when managing larger collections of Python files.
+<br/>
+<br/>
+Python Syntax compared to other programming languages
+<br/>
+<br/>
+
+    <li>Python was designed for readability, and has some similarities to the English language with influence from mathematics.</li>
+    <li>Python uses new lines to complete a command, as opposed to other programming languages which often use semicolons or parentheses.</li>
+    <li>Python relies on indentation, using whitespace, to define scope; such as the scope of loops, functions and classes. Other programming languages often use curly-brackets for this purpose.</li>
+        
       </div>
+      <br/>
+      <div></div>
+      <p>Let's try something. Click on the run button on the IDE below and see the amazing output it gives</p>
+      <p>It's fascinating right?</p>
+      <div></div>
+      <p>This is a teaser to the amazing things well be doing in this course with python</p>
+      </>
     ),
   },
   lesson2: {
